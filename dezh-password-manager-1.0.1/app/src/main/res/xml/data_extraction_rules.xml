@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- No vault data may ever be backed up or transferred (see Phase 2 security design). -->
+<!-- Vault data must never be backed up or transferred by the system. -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="root" path="." />

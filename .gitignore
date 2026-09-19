@@ -1,19 +1,39 @@
 # Dezh-e Pasargad
+
+# Build
 *.iml
 .gradle/
 build/
 captures/
 .externalNativeBuild
-.cxx
+.cxx/
+kotlin/errors/
 
 # IDE
 .idea/
 *.swp
+*.bak
+*~
 
-# Environment-specific SDK path (regenerated locally / by Android Studio)
+# Local / secrets — never commit
 local.properties
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+secrets.*
+.env
+.env.*
+**/keys/
+KEYS-POLICY.md
 
-# signed deliverable stays out of git (workspace file only)
-dezh-pasargad-release.apk
+# Signed deliverables stay out of git
 *.apk
+*.aab
 *.idsig
+dezh-pasargad-release.apk
+
+# OS
+.DS_Store
+Thumbs.db

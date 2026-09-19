@@ -24,7 +24,7 @@ private val Context.dataStore: DataStore<Preferences> by androidx.datastore.pref
 )
 
 /**
- * Preferences DataStore-backed settings (replaces the Phase-4 SharedPreferences
+ * Preferences DataStore-backed settings (replaces the previous SharedPreferences
  * controller). Strict on read: unknown enum names fall back to defaults instead
  * of crashing, and I/O hiccups emit defaults rather than tearing the flow down.
  */

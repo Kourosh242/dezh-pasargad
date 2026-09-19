@@ -44,7 +44,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * SELF-AUDIT regression proofs — each test was run BEFORE the fix and FAILED,
+ * Regression proofs — each test was run BEFORE the fix and FAILED,
  * demonstrating the reported defect really exists in code (bug reproduction),
  * and must turn GREEN after the fix.
  */

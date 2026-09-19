@@ -1,5 +1,4 @@
 // Dezh-e Pasargad — root settings
-// Single-module skeleton (Phase 1): multi-module complexity intentionally avoided.
 pluginManagement {
     repositories {
         google {

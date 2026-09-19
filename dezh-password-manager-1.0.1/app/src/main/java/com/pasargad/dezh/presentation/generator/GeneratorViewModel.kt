@@ -41,7 +41,7 @@ class GeneratorViewModel(
     val uiState: StateFlow<GeneratorUiState> = _uiState.asStateFlow()
 
     init {
-        // Phase 5: seed the controls from the persisted generator defaults.
+        // Seed the controls from the persisted generator defaults.
         viewModelScope.launch {
             val defaults = settingsRepository?.current()?.generator ?: GeneratorSettings()
             _uiState.update {
