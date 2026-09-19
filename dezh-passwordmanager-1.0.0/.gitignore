@@ -16,5 +16,4 @@ local.properties
 # signed deliverable stays out of git (workspace file only)
 dezh-pasargad-release.apk
 *.apk
-kotlin/errors/**
 *.idsig

@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.regression
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -27,7 +27,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Deterministic clipboard auto-clear contract (self-audit round 2, bug #5).
+ * Deterministic clipboard auto-clear contract for the generator screen.
  *
  * Time is fully controlled via the injected [GeneratorScreen] `suspendDelay`:
  * each delay(ms) call registers a gate keyed by its duration; the test resumes
@@ -147,7 +147,7 @@ class GeneratorClipboardAutoClearTest {
         )
         val delay = makeDelay()
         compose {
-            com.pasargad.dezh.presentation.generator.GeneratorScreenBuggy(
+            com.pasargad.dezh.presentation.generator.LegacyGeneratorScreen(
                 viewModel = viewModel,
                 animationsEnabled = true,
                 clipboardTimeoutSeconds = 2,

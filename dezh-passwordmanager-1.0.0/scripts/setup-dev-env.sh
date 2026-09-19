@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# دژ پاسارگاد — راه‌اندازی محیط build (برای سندباکس/ماشین تازه)
+# دژ پاسارگاد — راه‌اندازی محیط build (ماشین تازه / CI)
 # JDK 17 (Temurin) + Android SDK (platform android-37.0) + Gradle از Wrapper
-# نکته: npm/npx ممنوع است و در این اسکریپت استفاده نمی‌شود.
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
@@ -39,7 +38,7 @@ export ANDROID_HOME="$SDK"
 export PATH="$JAVA_HOME/bin:$SDK/cmdline-tools/latest/bin:$PATH"
 
 # --- SDK packages -------------------------------------------------------------
-# توجه: پلتفرم API 37 با شناسهٔ جدید «android-37.0» منتشر می‌شود (نه android-37).
+# توجه: پلتفرم API 37 با شناسهٔ «android-37.0» منتشر می‌شود (نه android-37).
 # نکته: در حالت `set -o pipefail`، پایان کار sdkmanager سیگنال SIGPIPE را به `yes`
 # می‌دهد (exit 141)؛ به همین دلیل خطا را اینجا می‌پذیریم.
 yes | sdkmanager --licenses >/dev/null 2>&1 || true

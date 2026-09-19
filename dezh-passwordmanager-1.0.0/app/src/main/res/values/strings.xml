@@ -231,7 +231,7 @@
     <string name="about_dezh_meaning">«دژ» نمایانگر یک دژ محافظ برای اسرار کاربر است.</string>
     <string name="about_pasargad_meaning">«پاسارگاد» به پاسارگاد و اهمیت تاریخی فارسی/هخامنشی آن اشاره دارد.</string>
     <string name="about_credits_title">سازنده</string>
-    <string name="about_created_by">Created by Korosh</string>
+    <string name="about_created_by">Created by Kourosh</string>
     <string name="about_security_note">هیچ نرم‌افزاری نمی‌تواند «صددرصد امن» باشد؛ دژ پاسارگاد از رمزنگاری استاندارد و اصول حداقل دسترسی استفاده می‌کند و پشتیبان‌ها را رمزگذاری‌شده نگه می‌دارد.</string>
     <string name="vault_more_actions">اقدامات بیشتر</string>
     <string name="vault_add_entry">افزودن رکورد جدید</string>

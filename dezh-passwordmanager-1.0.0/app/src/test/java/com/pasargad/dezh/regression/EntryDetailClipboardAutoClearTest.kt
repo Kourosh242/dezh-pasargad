@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.regression
 
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -35,9 +35,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Deterministic clipboard auto-clear contract for the ENTRY DETAIL screen
- * (full-audit round). Mirrors the round-2 generator harness: delay gates keyed
- * by capture order, paused looper pumping, no real time.
+ * Deterministic clipboard auto-clear contract for the ENTRY DETAIL screen.
+ * Mirrors the generator harness: delay gates keyed by capture order, paused
+ * looper pumping, no real time.
  *
  * Contract under test: EVERY copy re-arms the wipe — a re-copy inside the
  * window must CANCEL the pending wipe and start a fresh full window for the

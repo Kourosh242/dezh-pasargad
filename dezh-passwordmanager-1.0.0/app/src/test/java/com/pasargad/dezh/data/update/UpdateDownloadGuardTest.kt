@@ -2,6 +2,7 @@ package com.pasargad.dezh.data.update
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -56,5 +57,25 @@ class UpdateDownloadGuardTest {
         assertTrue(UpdateDownloadGuard.isDigestMatch("ABC", "abc"))
         assertTrue(UpdateDownloadGuard.isDigestMatch(null, "anything"))
         assertFalse(UpdateDownloadGuard.isDigestMatch("aa11", "bb22"))
+    }
+
+    @Test
+    fun `redirect hops stay inside the allowed channel hosts`() {
+        assertEquals(
+            "https://objects.githubusercontent.com/x/dezh.apk",
+            UpdateDownloadGuard.nextHop("https://objects.githubusercontent.com/x/dezh.apk", 0),
+        )
+        assertNull(UpdateDownloadGuard.nextHop("https://evil.example/x.apk", 0))
+        assertNull(UpdateDownloadGuard.nextHop("http://github.com/x/y.apk", 0))
+        assertNull(UpdateDownloadGuard.nextHop("https://github.com.evil.example/x.apk", 0))
+        assertNull(UpdateDownloadGuard.nextHop(null, 0))
+        assertNull(UpdateDownloadGuard.nextHop("   ", 0))
+    }
+
+    @Test
+    fun `redirect hops are bounded by the hop budget`() {
+        val url = "https://github.com/x/y.apk"
+        assertEquals(url, UpdateDownloadGuard.nextHop(url, UpdateDownloadGuard.MAX_REDIRECTS - 1))
+        assertNull(UpdateDownloadGuard.nextHop(url, UpdateDownloadGuard.MAX_REDIRECTS))
     }
 }

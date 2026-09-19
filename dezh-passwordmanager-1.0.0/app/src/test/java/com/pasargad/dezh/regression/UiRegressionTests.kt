@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.regression
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -44,9 +44,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * SELF-AUDIT regression proofs — each test was run BEFORE the fix and FAILED,
- * demonstrating the reported defect really exists in code (bug reproduction),
- * and must turn GREEN after the fix.
+ * UI regression tests for previously fixed defects: strength band shown when
+ * editing an existing entry, backup meter label text, empty-search state and
+ * IME "done" clearing the unlock field.
  */
 class EditMeterLoadTest {
 
@@ -131,7 +131,7 @@ class BackupMeterLabelUiTest {
                 BackupCodec(SecureRandom(), kdfIterations = 2_000),
                 repository = com.pasargad.dezh.vault.StubVaultEntryRepository(),
             ),
-            fileGateway = com.pasargad.dezh.selfaudit.NoOpFileGateway,
+            fileGateway = NoOpFileGateway,
             settingsRepository = StubSettingsRepository(),
         )
         composeRule.setContent { BackupScreen(viewModel = viewModel, onBack = {}) }

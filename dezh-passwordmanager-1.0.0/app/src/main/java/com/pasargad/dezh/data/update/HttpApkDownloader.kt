@@ -62,16 +62,36 @@ class HttpApkDownloader(
         }
     }
 
+    /**
+     * Opens the download connection without automatic redirects: every hop is
+     * re-validated against the channel allowlist by [UpdateDownloadGuard.nextHop]
+     * before it is followed, so a redirect can never move the download outside
+     * the trusted GitHub hosts.
+     */
     private fun openConnection(url: String): HttpURLConnection {
+        var currentUrl = url
+        var hops = 0
+        while (true) {
+            val connection = newConnection(currentUrl)
+            val code = connection.responseCode
+            if (code in HTTP_OK..HTTP_OK_MAX) return connection
+            val location = connection.getHeaderField(HEADER_LOCATION)
+            connection.disconnect()
+            if (code !in HTTP_REDIRECT..HTTP_REDIRECT_MAX) {
+                throw ApkDownloadException("Update download HTTP $code")
+            }
+            currentUrl = UpdateDownloadGuard.nextHop(location, hops)
+                ?: throw ApkDownloadException("Update download redirected outside the allowed channel hosts")
+            hops++
+        }
+    }
+
+    private fun newConnection(url: String): HttpURLConnection {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.connectTimeout = CONNECT_TIMEOUT_MS
         connection.readTimeout = READ_TIMEOUT_MS
-        connection.instanceFollowRedirects = true
+        connection.instanceFollowRedirects = false
         connection.setRequestProperty("User-Agent", USER_AGENT)
-        if (connection.responseCode !in HTTP_OK..HTTP_OK_MAX) {
-            connection.disconnect()
-            throw ApkDownloadException("Update download HTTP ${connection.responseCode}")
-        }
         return connection
     }
 
@@ -141,6 +161,9 @@ class HttpApkDownloader(
         const val READ_TIMEOUT_MS = 30_000
         const val HTTP_OK = 200
         const val HTTP_OK_MAX = 299
+        const val HTTP_REDIRECT = 300
+        const val HTTP_REDIRECT_MAX = 399
+        const val HEADER_LOCATION = "Location"
         const val COPY_BUFFER_BYTES = 64 * 1024
         const val END_OF_STREAM = -1
         const val PERCENT_SCALE = 100L
