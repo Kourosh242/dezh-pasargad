@@ -2,7 +2,7 @@
 
 # دژ پاسارگاد | Dezh-e Pasargad
 
-<img src="art/app-icon.png" alt="نشان دژ پاسارگاد" width="120" />
+<img src="dezh-passwordmanager-1.0.0/art/app-icon.png" alt="نشان دژ پاسارگاد" width="120" />
 
 **گاوصندوق رمز عبور آفلاین، فارسی‌محور و متن‌باز برای اندروید**
 رمزنگاری واقعی روی دستگاه · بدون تبلیغ · بدون ردیابی · بدون ابر · بدون حساب کاربری
@@ -30,11 +30,11 @@
 
 | گشودن گاوصندوق | صندوقچه | رمزساز |
 |:---:|:---:|:---:|
-| <img src="art/screenshots/01-unlock.jpg" alt="صفحهٔ گشودن گاوصندوق" width="210"> | <img src="art/screenshots/02-vault.jpg" alt="فهرست گاوصندوق" width="210"> | <img src="art/screenshots/03-generator.jpg" alt="تولیدکنندهٔ رمز" width="210"> |
+| <img src="dezh-passwordmanager-1.0.0/art/screenshots/01-unlock.jpg" alt="صفحهٔ گشودن گاوصندوق" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/02-vault.jpg" alt="فهرست گاوصندوق" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/03-generator.jpg" alt="تولیدکنندهٔ رمز" width="210"> |
 
 | تنظیمات | بررسی بروزرسانی |
 |:---:|:---:|
-| <img src="art/screenshots/04-settings.jpg" alt="تنظیمات" width="210"> | <img src="art/screenshots/05-update.jpg" alt="بررسی بروزرسانی" width="210"> |
+| <img src="dezh-passwordmanager-1.0.0/art/screenshots/04-settings.jpg" alt="تنظیمات" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/05-update.jpg" alt="بررسی بروزرسانی" width="210"> |
 
 ## ویژگی‌ها
 
@@ -112,6 +112,9 @@
 پیش‌نیازها: JDK 17، Android SDK (پلتفرم `android-37.0` و build-tools 36.0.0).
 
 ```bash
+# سورس پروژه داخل این پوشه است؛ ابتدا وارد آن شوید
+cd dezh-passwordmanager-1.0.0
+
 # راه‌اندازی محیط (اختیاری؛ برای ماشین تازه)
 scripts/setup-dev-env.sh
 source env.sh && echo "sdk.dir=$ANDROID_HOME" > local.properties
@@ -158,7 +161,7 @@ app/src/main/java/com/pasargad/dezh/
 ## مجوزها
 
 - کد این پروژه تحت پروانهٔ [MIT](LICENSE) — Copyright (c) 2026 Kourosh242.
-- فونت **وزیرمتن** تحت پروانهٔ SIL Open Font License 1.1 — مشاهدهٔ متن پروانه: [`licenses/OFL-Vazirmatn.txt`](licenses/OFL-Vazirmatn.txt).
+- فونت **وزیرمتن** تحت پروانهٔ SIL Open Font License 1.1 — مشاهدهٔ متن پروانه: [`licenses/OFL-Vazirmatn.txt`](dezh-passwordmanager-1.0.0/licenses/OFL-Vazirmatn.txt).
 - کتابخانه‌های AndroidX، Jetpack Compose و Kotlin تحت پروانهٔ Apache-2.0 هستند.
 
 ## سلب مسئولیت
