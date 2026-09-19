@@ -214,7 +214,7 @@
     <string name="about_dezh_meaning">«دژ» نمایانگر یک دژ محافظ برای اسرار کاربر است.</string>
     <string name="about_pasargad_meaning">«پاسارگاد» به پاسارگاد و اهمیت تاریخی فارسی/هخامنشی آن اشاره دارد.</string>
     <string name="about_credits_title">Credits</string>
-    <string name="about_created_by">Created by Korosh</string>
+    <string name="about_created_by">Created by Kourosh</string>
     <string name="about_security_note">No software is “100%% secure”; Dezh-e Pasargad applies standard cryptography and least-privilege principles and keeps backups encrypted.</string>
     <string name="vault_more_actions">More actions</string>
     <string name="vault_add_entry">Add new entry</string>
