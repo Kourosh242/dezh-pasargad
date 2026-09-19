@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default locale is Persian (fa): primary audience of Dezh-e Pasargad.
+         RTL is system-driven (android:supportsRtl="true"). -->
+    <string name="app_name">دژ پاسارگاد</string>
+
+    <!-- Startup -->
+    <string name="startup_title">دژ پاسارگاد</string>
+
+    <!-- Master password setup -->
+    <string name="setup_title">ساخت رمز اصلی</string>
+    <string name="setup_description">رمز اصلی تنها کلید گشودن گاوصندوق است و قابل بازیابی نیست؛ آن را به خاطر بسپارید.</string>
+    <string name="setup_password_label">رمز اصلی</string>
+    <string name="setup_confirm_label">تکرار رمز اصلی</string>
+    <string name="setup_submit">ایجاد گاوصندوق</string>
+    <string name="setup_mismatch">رمزها یکسان نیستند</string>
+    <string name="setup_error">ایجاد گاوصندوق ناموفق بود</string>
+
+    <!-- Strength -->
+    <string name="strength_weak">ضعیف</string>
+    <string name="strength_fair">قابل قبول</string>
+    <string name="strength_strong">خیلی خوب</string>
+    <string name="failure_too_short">حداقل ۱۰ نویسه لازم است</string>
+    <string name="failure_too_long">حداکثر ۱۲۸ نویسه مجاز است</string>
+    <string name="failure_classes">ترکیب حروف، ارقام و نمادها لازم است</string>
+    <string name="failure_common">این رمز در فهرست رمزهای رایج است</string>
+    <string name="failure_repeated">تکرار بیش از حد یک نویسه</string>
+
+    <!-- Unlock -->
+    <string name="unlock_title">گشودن گاوصندوق</string>
+    <string name="unlock_password_label">رمز اصلی</string>
+    <string name="unlock_submit">گشودن</string>
+    <string name="unlock_error_wrong">رمز اصلی نادرست است</string>
+    <string name="unlock_error_corrupted">داده‌های امنیتی آسیب دیده‌اند</string>
+    <plurals name="unlock_backoff_seconds">
+        <item quantity="one">تلاش مجدد تا یک ثانیه دیگر</item>
+        <item quantity="other">تلاش مجدد تا %1$d ثانیه دیگر</item>
+    </plurals>
+
+    <!-- Vault -->
+    <string name="vault_title">گاوصندوق</string>
+    <string name="vault_generate">تولید رمز</string>
+    <string name="vault_nav_search">جستجو</string>
+    <string name="sort_name">نام</string>
+    <string name="sort_created">تاریخ ایجاد</string>
+    <string name="sort_updated">تاریخ به‌روزرسانی</string>
+    <string name="sort_category">دسته</string>
+    <string name="sort_favorites">علاقه‌مندی‌ها</string>
+    <string name="theme_system">تم: سیستم</string>
+    <string name="theme_light">تم: روشن</string>
+    <string name="theme_dark">تم: تاریک</string>
+    <string name="categories_title">دسته‌ها</string>
+    <string name="categories_empty">هنوز دسته‌ای ساخته نشده است</string>
+    <string name="favorites_title">علاقه‌مندی‌ها</string>
+    <string name="favorites_empty">آیتم علاقه‌مندی‌ای وجود ندارد</string>
+
+    <!-- Generator -->
+    <string name="generator_title">تولیدکنندهٔ رمز</string>
+    <string name="generator_regenerate">تولید مجدد</string>
+    <string name="generator_copy">کپی</string>
+    <string name="generator_copied">کپی شد</string>
+    <string name="generator_length">طول رمز: %1$d</string>
+    <string name="generator_empty_hint">حداقل یک دستهٔ نویسه را فعال کنید</string>
+    <string name="generator_uppercase">حروف بزرگ</string>
+    <string name="generator_lowercase">حروف کوچک</string>
+    <string name="generator_digits">ارقام</string>
+    <string name="generator_symbols">نمادها</string>
+    <string name="generator_exclude_ambiguous">حذف نویسه‌های گیج‌کننده</string>
+    <string name="generator_min_upper">حداقل حروف بزرگ</string>
+    <string name="generator_min_lower">حداقل حروف کوچک</string>
+    <string name="generator_min_digits">حداقل ارقام</string>
+    <string name="generator_min_symbols">حداقل نمادها</string>
+    <string name="generator_min_of">%1$s: %2$d</string>
+    <string name="entry_generate">تولید</string>
+    <string name="generator_sheet_title">رمزساز سریع</string>
+    <string name="generator_sheet_use">استفاده از این رمز</string>
+    <string name="entry_copy_username">کپی نام کاربری</string>
+    <string name="entry_copy_email">کپی ایمیل</string>
+    <string name="vault_favorite_toggle">تغییر وضعیت علاقه‌مندی</string>
+    <string name="generator_increase">افزایش حداقل</string>
+    <string name="generator_decrease">کاهش حداقل</string>
+    <string name="entry_meter_label">قدرت رمز: %1$s</string>
+    <string name="vault_search_hint">جستجو در گاوصندوق…</string>
+    <string name="vault_filter_favorites">علاقه‌مندی‌ها</string>
+    <string name="vault_category_all">همه</string>
+    <string name="vault_empty">آیتمی نیست. با دکمهٔ + اولین آیتم را اضافه کنید.</string>
+    <string name="vault_loading">در حال بارگذاری…</string>
+    <string name="vault_open">بازکردن</string>
+    <plurals name="vault_entry_count">
+        <item quantity="one">%1$d آیتم</item>
+        <item quantity="other">%1$d آیتم</item>
+    </plurals>
+
+    <!-- Entry add/edit -->
+    <string name="entry_add_title">آیتم جدید</string>
+    <string name="entry_edit_title">ویرایش آیتم</string>
+    <string name="entry_field_title">عنوان / نام سرویس</string>
+    <string name="entry_title_required">عنوان الزامی است</string>
+    <string name="entry_field_username">نام کاربری</string>
+    <string name="entry_field_email">ایمیل</string>
+    <string name="entry_field_password">رمز عبور</string>
+    <string name="entry_field_notes">یادداشت‌ها</string>
+    <string name="entry_field_category">دسته</string>
+    <string name="entry_field_favorite">علاقه‌مندی</string>
+    <string name="entry_save">ذخیره</string>
+    <string name="entry_cancel">انصراف</string>
+    <string name="entry_save_failed">ذخیره ناموفق بود</string>
+
+    <!-- Entry details -->
+    <string name="entry_show_password">نمایش رمز</string>
+    <string name="entry_hide_password">پنهان‌کردن رمز</string>
+    <string name="entry_edit">ویرایش</string>
+    <string name="entry_delete">حذف</string>
+    <string name="entry_delete_confirm_title">حذف آیتم</string>
+    <string name="entry_delete_confirm_text">این آیتم برای همیشه حذف می‌شود. ادامه می‌دهید؟</string>
+    <string name="entry_timestamps">ایجاد: %1$s · آخرین به‌روزرسانی: %2$s</string>
+    <string name="action_cancel">انصراف</string>
+    <string name="action_save">ذخیره</string>
+    <string name="action_back">بازگشت</string>
+    <string name="action_done">تمام</string>
+    <string name="action_dismiss">بستن</string>
+
+    <!-- Settings -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_section_appearance">ظاهر</string>
+    <string name="settings_section_vault">گاوصندوق</string>
+    <string name="settings_section_backup">پشتیبان‌گیری</string>
+    <string name="settings_section_security">امنیت</string>
+    <string name="settings_section_about">درباره</string>
+    <string name="settings_theme_nav">تم و نمایش</string>
+    <string name="settings_security_nav">تنظیمات امنیتی</string>
+    <string name="settings_backup_nav">پشتیبان‌گیری رمزگذاری‌شده</string>
+    <string name="settings_restore_nav">بازیابی از پشتیبان</string>
+    <string name="settings_about_nav">دربارهٔ دژ پاسارگاد</string>
+    <string name="settings_display_mode">حالت نمایش فهرست</string>
+    <string name="display_mode_auto">خودکار (اندازهٔ صفحه)</string>
+    <string name="display_mode_list">همیشه فهرست</string>
+    <string name="display_mode_grid">همیشه شبکه‌ای</string>
+    <string name="settings_startup_page">صفحهٔ شروع پس از باز کردن قفل</string>
+    <string name="startup_page_vault">گاوصندوق</string>
+    <string name="startup_page_search">جستجو</string>
+    <string name="startup_page_favorites">علاقه‌مندی‌ها</string>
+    <string name="startup_page_generator">تولیدکنندهٔ رمز</string>
+    <string name="startup_page_categories">دسته‌ها</string>
+    <string name="settings_default_category">دستهٔ پیش‌فرض رکورد جدید</string>
+    <string name="settings_value_none">— تعیین نشده —</string>
+    <string name="settings_remember_filters">به‌خاطر سپردن فیلترهای جستجو</string>
+    <string name="settings_animations">پویانمایی رابط</string>
+    <string name="settings_backup_filename">نام پایهٔ فایل پشتیبان</string>
+    <string name="settings_reset_action">بازنشانی</string>
+    <string name="settings_reset">بازنشانی تنظیمات</string>
+    <string name="settings_reset_confirm_text">همهٔ تنظیمات به مقادیر پیش‌فرض برمی‌گردند. گاوصندوق و رکوردها دست‌نخورده می‌مانند.</string>
+    <string name="settings_selected">انتخاب‌شده</string>
+
+    <!-- Theme settings -->
+    <string name="theme_mode">حالت تم</string>
+    <string name="theme_accent">رنگ تأکیدی</string>
+    <string name="accent_default">طلایی (پیش‌فرض دژ)</string>
+    <string name="accent_emerald">سبز</string>
+    <string name="accent_amber">نارنجی</string>
+    <string name="accent_rose">صورتی</string>
+    <string name="accent_violet">بنفش</string>
+    <string name="theme_font_scale">اندازهٔ قلم</string>
+    <string name="font_scale_small">کوچک</string>
+    <string name="font_scale_normal">معمولی</string>
+    <string name="font_scale_large">بزرگ</string>
+    <string name="font_scale_xlarge">بزرگ‌تر</string>
+
+    <!-- Security settings -->
+    <string name="settings_screenshot_protection">حفاظت از عکاسی</string>
+    <string name="settings_screenshot_protection_desc">روشن بودن آن، اسکرین‌شات و نمایش محتوا در پیش‌نمایش برنامه‌ها را مسدود می‌کند</string>
+    <string name="settings_auto_lock">قفل خودکار پس از</string>
+    <string name="settings_auto_lock_value">%1$d دقیقه</string>
+    <string name="settings_clipboard_timeout">پاک‌سازی خودکار کلیپ‌بورد پس از</string>
+    <string name="settings_clipboard_value">%1$d ثانیه</string>
+    <string name="settings_clipboard_never">هرگز</string>
+    <string name="settings_confirmations">تأییدیه‌ها</string>
+    <string name="settings_confirm_delete">تأیید پیش از حذف رکورد</string>
+    <string name="settings_confirm_discard">تأیید پیش از دور انداختن تغییرات</string>
+
+    <!-- Backup -->
+    <string name="backup_explanation">پشتیبان به‌صورت رمزگذاری‌شده و احرازشده (AES-256-GCM با کلید مشتق‌شده از عبارت عبور) ساخته می‌شود. عبارت عبور هیچ‌جا ذخیره نمی‌شود — اگر گم شود، پشتیبان قابل بازیابی نیست.</string>
+    <string name="backup_passphrase">عبارت عبور پشتیبان</string>
+    <string name="backup_passphrase_confirm">تکرار عبارت عبور</string>
+    <string name="backup_passphrase_mismatch">عبارت‌های عبور یکسان نیستند</string>
+    <string name="backup_action">انتخاب محل و ساخت پشتیبان</string>
+    <string name="backup_success">پشتیبان با %1$d رکورد ساخته و راستی‌آزمایی شد</string>
+    <string name="backup_error_invalid_path">مسیر انتخاب‌شده معتبر نیست؛ جای دیگری را انتخاب کنید</string>
+    <string name="backup_error_insufficient_storage">فضای ذخیره‌سازی کافی نیست</string>
+    <string name="backup_error_io">خطای ورودی/خروجی هنگام نوشتن فایل</string>
+    <string name="backup_error_corrupted_output">فایل نوشته‌شده راستی‌آزمایی نشد؛ پشتیبان نامعتبر است</string>
+    <string name="backup_error_canceled">انتخاب محل لغو شد</string>
+
+    <!-- Restore -->
+    <string name="restore_explanation">فایل پشتیبان رمزگذاری‌شدهٔ ساخته‌شده توسط همین برنامه را انتخاب کنید. ساختار فایل پیش از درخواست عبارت عبور راستی‌آزمایی می‌شود.</string>
+    <string name="restore_pick_file">انتخاب فایل پشتیبان</string>
+    <string name="restore_header_info">پشتیبان معتبر — نسخهٔ %1$d، ساخته‌شده در %2$s</string>
+    <string name="restore_passphrase_prompt">برای رمزگشایی، عبارت عبور پشتیبان را وارد کنید</string>
+    <string name="restore_unlock">بازکردن پشتیبان</string>
+    <string name="restore_preview">%1$d رکورد در این پشتیبان یافت شد</string>
+    <string name="restore_choose_mode">روش بازیابی را انتخاب کنید:</string>
+    <string name="restore_merge_title">ادغام</string>
+    <string name="restore_merge_consequence">رکوردهای جدید اضافه می‌شوند؛ رکوردهای هم‌شناسه فقط در صورت جدیدتر بودن نسخهٔ پشتیبان به‌روزرسانی می‌شوند. هیچ چیزی حذف نمی‌شود.</string>
+    <string name="restore_merge_action">ادغام با گاوصندوق فعلی</string>
+    <string name="restore_replace_title">جایگزینی کامل (مخرب)</string>
+    <string name="restore_replace_consequence">کل گاوصندوق فعلی حذف و با محتوای پشتیبان جایگزین می‌شود. این عمل بازگشت‌پذیر نیست.</string>
+    <string name="restore_replace_action">جایگزینی کل گاوصندوق</string>
+    <string name="restore_replace_confirm_title">جایگزینی کامل گاوصندوق؟</string>
+    <string name="restore_replace_confirm_text">تمام رکوردهای فعلی برای همیشه حذف می‌شوند و فقط محتوای پشتیبان باقی می‌ماند. لغو این تصمیم ممکن نیست.</string>
+    <string name="restore_replace_confirm_action">حذف و جایگزینی</string>
+    <string name="restore_done_merge">ادغام انجام شد: %1$d افزوده، %2$d به‌روزرسانی، %3$d بدون تغییر</string>
+    <string name="restore_done_replace">جایگزینی انجام شد: %1$d رکورد قبلی حذف، %2$d رکورد از پشتیبان بازیابی شد</string>
+    <string name="restore_error_invalid_path">فایل قابل دسترسی نیست</string>
+    <string name="restore_error_empty_file">فایل خالی است</string>
+    <string name="restore_error_too_large">فایل بیش از حد بزرگ است</string>
+    <string name="restore_error_io">خطای ورودی/خروجی هنگام خواندن فایل</string>
+    <string name="restore_error_invalid_format">این فایل یک پشتیبان معتبرِ دژ نیست</string>
+    <string name="restore_error_unsupported_version">نسخهٔ این پشتیبان با این نسخه از برنامه پشتیبانی نمی‌شود</string>
+    <string name="restore_error_integrity">یکپارچگی فایل نقض شده است؛ فایل دستکاری‌شده یا خراب است</string>
+    <string name="restore_error_corrupted">پشتیبان خراب است</string>
+    <string name="restore_error_incomplete">پشتیبان ناقص است؛ همهٔ رکوردها موجود نیستند</string>
+    <string name="restore_error_wrong_password">عبارت عبور نادرست است</string>
+    <string name="restore_error_import_failure">هنگام درج رکوردها خطایی رخ داد؛ گاوصندوق ممکن است تغییرات جزئی کرده باشد</string>
+
+    <!-- Entry detail additions -->
+    <string name="entry_copy_password">کپی رمز</string>
+    <string name="entry_copied_autoclear">کپی شد — پس از مهلت تعیین‌شده پاک می‌شود</string>
+    <string name="entry_discard_confirm_title">دور انداختن تغییرات؟</string>
+    <string name="entry_discard_confirm_text">تغییرات ذخیره نشده از بین می‌روند.</string>
+    <string name="entry_discard_confirm_action">دور انداختن</string>
+
+    <!-- About -->
+    <string name="about_version">نسخهٔ %1$s</string>
+    <string name="about_meaning_title">معنای نام</string>
+    <string name="about_dezh_meaning">«دژ» نمایانگر یک دژ محافظ برای اسرار کاربر است.</string>
+    <string name="about_pasargad_meaning">«پاسارگاد» به پاسارگاد و اهمیت تاریخی فارسی/هخامنشی آن اشاره دارد.</string>
+    <string name="about_credits_title">سازنده</string>
+    <string name="about_created_by">Created by Korosh</string>
+    <string name="about_security_note">هیچ نرم‌افزاری نمی‌تواند «صددرصد امن» باشد؛ دژ پاسارگاد از رمزنگاری استاندارد و اصول حداقل دسترسی استفاده می‌کند و پشتیبان‌ها را رمزگذاری‌شده نگه می‌دارد.</string>
+    <string name="vault_more_actions">اقدامات بیشتر</string>
+    <string name="vault_add_entry">افزودن رکورد جدید</string>
+    <string name="settings_auto_lock_immediately">بلافاصله هنگام خروج از برنامه</string>
+    <!-- UI/UX overhaul -->
+    <string name="vault_empty_title">گاوصندوق هنوز خالی است</string>
+    <string name="vault_empty_body">نخستین رمزتان را اضافه کنید؛ همه‌چیز فقط روی همین دستگاه و به‌صورت رمزنگاری‌شده می‌ماند.</string>
+    <string name="vault_empty_cta">افزودن نخستین رمز</string>
+    <string name="favorites_empty_title">هنوز علاقه‌مندی‌ای ندارید</string>
+    <string name="favorites_empty_body">با زدن نشان قلب روی هر رکورد، پرمصرف‌ها اینجا جمع می‌شوند.</string>
+    <string name="copy_done">کپی شد</string>
+    <string name="vault_entries_semantics">شمارش رکوردهای گاوصندوق</string>
+    <string name="search_empty_title">موردی یافت نشد</string>
+    <string name="search_empty_body">برای این جستجو نتیجه‌ای نبود؛ عبارت دیگری را امتحان کنید.</string>
+    <string name="nav_vault">صندوقچه</string>
+    <string name="nav_generator">رمزساز</string>
+    <string name="nav_settings">تنظیمات</string>
+    <string name="menu_check_updates">بررسی بروزرسانی</string>
+    <string name="update_title">بررسی بروزرسانی</string>
+    <string name="update_current_version">نسخهٔ فعلی: %1$s</string>
+    <string name="update_check_action">بررسی کن</string>
+    <string name="update_idle_hint">با لمس دکمه، جدیدترین نسخهٔ منتشرشده در صفحهٔ Releases گیت‌هاب بررسی می‌شود. این بررسی به اینترنت نیاز دارد.</string>
+    <string name="update_checking">در حال بررسی نسخهٔ جدید…</string>
+    <string name="update_up_to_date">شما جدیدترین نسخه را دارید</string>
+    <string name="update_available_title">به‌روزرسانی جدید موجود است</string>
+    <string name="update_available_desc">نسخهٔ %1$s منتشر شده است. برای دانلود فایل APK و نصب، دکمهٔ زیر را بزنید.</string>
+    <string name="update_download_action">همین حالا به‌روزرسانی کن</string>
+    <string name="update_opens_in_browser">صفحهٔ انتشار در مرورگر باز می‌شود</string>
+    <string name="update_check_failed">بررسی ناموفق بود؛ اتصال اینترنت را بررسی کنید.</string>
+    <string name="update_retry">تلاش دوباره</string>
+    <string name="update_install_in_app_action">دانلود و نصب در همین اپ</string>
+    <string name="update_release_page_link">مشاهدهٔ صفحهٔ انتشار</string>
+    <string name="update_download_progress">در حال دانلود نسخهٔ جدید… %1$d%%</string>
+    <string name="update_inspecting_apk">بررسی فایل نصبی…</string>
+    <string name="update_apk_info_title">اطلاعات فایل نصبی</string>
+    <string name="update_apk_info_row_file">نام فایل: %1$s</string>
+    <string name="update_apk_info_row_size">حجم: %1$s</string>
+    <string name="update_apk_info_row_version">نسخهٔ هدف (versionCode): %1$d</string>
+    <string name="update_apk_info_row_package">بسته: %1$s</string>
+    <string name="update_apk_info_verified">این فایل برای همین اپ است، از نسخهٔ فعلی جدیدتر و با همان کلید امضاشده.</string>
+    <string name="update_install_now_action">نصب</string>
+    <string name="update_need_permission_title">اجازهٔ نصب لازم است</string>
+    <string name="update_need_permission_desc">برای نصب به‌روزرسانی، اندروید باید اجازهٔ «نصب برنامه‌های ناشناس» را به همین اپ بدهد. با دکمهٔ زیر صفحهٔ تنظیمات همین اپ باز می‌شود؛ پس از فعال‌کردن اجازه، نصب خودکار ادامه می‌یابد.</string>
+    <string name="update_open_settings_action">بازکردن تنظیمات</string>
+    <string name="update_permission_denied">اجازهٔ نصب داده نشد؛ بدون این اجازه نمی‌توان به‌روزرسانی را نصب کرد.</string>
+    <string name="update_installing">در حال نصب… پنجرهٔ تأیید اندروید را دنبال کنید.</string>
+    <string name="update_waiting_confirmation">در انتظار تأیید شما در پنجرهٔ رسمی اندروید…</string>
+    <string name="update_install_success">نصب با موفقیت انجام شد</string>
+    <string name="update_install_aborted">نصب لغو شد. می‌توانید دوباره تلاش کنید.</string>
+    <string name="update_install_blocked">نصب توسط سیستم مسدود شد%1$s</string>
+    <string name="update_install_failed">نصب ناموفق بود%1$s</string>
+    <string name="update_error_suffix">: %1$s</string>
+    <string name="update_error_plain">.</string>
+    <string name="update_refused_title">فایل نصبی رد شد</string>
+    <string name="update_refused_wrong_package">این فایل متعلق به اپ دیگری است (%1$s) و قابل نصب روی این اپ نیست.</string>
+    <string name="update_refused_not_newer">نسخهٔ فایل (%1$d) جدیدتر از نسخهٔ نصب‌شده نیست.</string>
+    <string name="update_refused_signature">امضای فایل با کلید همین اپ هم‌خوانی ندارد؛ برای جلوگیری از نصب برنامهٔ دستکاری‌شده، متوقف شد.</string>
+    <string name="update_refused_unreadable">فایل به‌عنوان APK معتبر خوانده نشد؛ ممکن است ناقص یا خراب باشد.</string>
+    <string name="update_download_failed">دانلود ناموفق بود%1$s</string>
+    <string name="update_failed_no_asset">این نسخهٔ منتشرشده فایل APK ندارد؛ محتوای صفحهٔ Release را بررسی کنید.</string>
+    <string name="vault_health_title">سلامت رمزها</string>
+    <string name="vault_health_ok">همهٔ رمزها سالم‌اند</string>
+    <string name="vault_health_attention">چند رمز به بهبود نیاز دارند</string>
+    <string name="health_strong">رمز قوی</string>
+    <string name="health_fair">رمز متوسط</string>
+    <string name="health_weak">رمز ضعیف</string>
+</resources>
