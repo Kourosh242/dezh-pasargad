@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.quality
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -27,18 +27,15 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Deterministic clipboard auto-clear contract (self-audit round 2, bug #5).
+ * Deterministic clipboard auto-clear contract for the generator screen.
  *
  * Time is fully controlled via the injected [GeneratorScreen] `suspendDelay`:
  * each delay(ms) call registers a gate keyed by its duration; the test resumes
  * gates in a chosen order. No real time, no looper dependence.
  *
- * History: the shipped logic keyed BOTH the 1.5s "message hide" effect and the
- * clipboard-wipe effect on the same `copied` boolean, so hiding the message
- * CANCELLED the pending wipe — the copied password never auto-cleared for any
- * selectable timeout (all ≥ 15s > 1.5s). Proven by
- * [generator_copy_autoclears_buggy_variant_FAILS] failing against a faithful
- * copy of the old logic, and by the looper-based run against the real old code.
+ * Contract under test: hiding the "copied" message must NOT cancel the pending
+ * clipboard wipe — the copied password is cleared after the configured timeout
+ * even though the message hides earlier.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -138,37 +135,6 @@ class GeneratorClipboardAutoClearTest {
         )
     }
 
-    /** Proof: the faithful copy of the OLD logic fails the same contract. */
-    @Test
-    fun old_logic_keeps_password_on_clipboard_documented() {
-        val viewModel = GeneratorViewModel(
-            generator = PasswordGenerator(SecureRandom()),
-            settingsRepository = StubSettingsRepository(),
-        )
-        val delay = makeDelay()
-        compose {
-            com.pasargad.dezh.presentation.generator.GeneratorScreenBuggy(
-                viewModel = viewModel,
-                animationsEnabled = true,
-                clipboardTimeoutSeconds = 2,
-                suspendDelay = delay,
-            )
-        }
-        clickCopy()
-        pump()
-        assertTrue(!Holder.clipboard?.getText()?.text.isNullOrEmpty())
-
-        resume(1_500) // message hides → old code cancels the wipe (same key)
-        pump()
-        resume(2_000) // nothing is waiting anymore — the wipe was cancelled
-        pump()
-
-        // Old logic: the clipboard is STILL holding the password here.
-        assertTrue(
-            "old logic is expected to KEEP the password on the clipboard",
-            Holder.clipboard?.getText()?.text?.isNotEmpty() == true,
-        )
-    }
 }
 
 private typealias Composable = androidx.compose.runtime.Composable

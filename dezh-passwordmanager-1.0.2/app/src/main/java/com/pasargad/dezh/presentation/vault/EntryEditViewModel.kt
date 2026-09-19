@@ -54,7 +54,7 @@ class EntryEditViewModel(
     val uiState: StateFlow<EntryEditUiState> = _uiState.asStateFlow()
 
     init {
-        // New-entry form: preselect the configured default category (Phase 5).
+        // New-entry form: preselect the configured default category.
         if (initialEntryId == null) {
             viewModelScope.launch {
                 val defaultCategory = runCatching { defaultCategoryProvider?.invoke().orEmpty() }.getOrDefault("")

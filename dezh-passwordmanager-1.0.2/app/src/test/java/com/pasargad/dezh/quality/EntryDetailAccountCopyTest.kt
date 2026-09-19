@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.quality
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription

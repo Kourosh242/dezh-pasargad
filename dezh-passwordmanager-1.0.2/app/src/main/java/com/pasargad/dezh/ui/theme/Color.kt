@@ -61,7 +61,7 @@ val SurfaceVariantDark = Color(0xFF4D4639)
 val OnSurfaceVariantDark = Color(0xFFD0C5B4)
 val OutlineDark = Color(0xFF998F80)
 
-// --- Phase 5 accent presets (light/dark pairs, WCAG-checked contrast targets) ---
+// --- Accent presets (light/dark pairs, WCAG-checked contrast targets) ---
 val EmeraldPrimaryLight = Color(0xFF19603F)
 val EmeraldPrimaryDark = Color(0xFF7EDCB0)
 val EmeraldSecondaryLight = Color(0xFF3E6355)
