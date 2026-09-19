@@ -2,15 +2,15 @@
 
 # دژ پاسارگاد | Dezh-e Pasargad
 
-<img src="dezh-passwordmanager-1.0.0/art/app-icon.png" alt="نشان دژ پاسارگاد" width="120" />
+<img src="dezh-password-manager-1.0.1/art/app-icon.png" alt="نشان دژ پاسارگاد" width="120" />
 
-**گاوصندوق رمز عبور آفلاین، فارسی‌محور و متن‌باز برای اندروید**
+**گاوصندوق رمز عبور آفلاین، فارسی‌محور و متن‌باز برای اندروید**  
 رمزنگاری واقعی روی دستگاه · بدون تبلیغ · بدون ردیابی · بدون ابر · بدون حساب کاربری
 
 [![پروانه: MIT](https://img.shields.io/badge/پروانه-MIT-gold.svg)](LICENSE)
-[![نسخه: 1.0.0](https://img.shields.io/badge/نسخهٔ_پایدار-1.0.0-blue.svg)](https://github.com/Kourosh242/dezh-pasargad/releases/tag/1.0.0)
+[![نسخه: 1.0.1](https://img.shields.io/badge/نسخهٔ_پایدار-1.0.1-blue.svg)](https://github.com/Kourosh242/dezh-pasargad/releases/tag/1.0.1)
 [![اندروید: 10 تا 16](https://img.shields.io/badge/اندروید-10_تا_16-3DDC84.svg?logo=android&logoColor=white)](#سازگاری)
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF.svg?logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.x-7F52FF.svg?logo=kotlin&logoColor=white)](https://kotlinlang.org)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack_Compose_M3-4285F4.svg)](https://developer.android.com/compose)
 [![وضعیت: آفلاین](https://img.shields.io/badge/شبکه-کاملاً_آفلاین-success.svg)](#حریم-خصوصی-و-مجوزها)
 
@@ -24,17 +24,17 @@
 
 دژ پاسارگاد یک مدیر رمز عبور **آفلاین** برای اندروید است که تمام اسرار شما را با رمزنگاری استاندارد (AES-256-GCM) و کلیدی که تنها از رمز اصلی شما مشتق می‌شود (PBKDF2-HMAC-SHA256) روی خود دستگاه نگه می‌دارد. هیچ سروری وجود ندارد، هیچ داده‌ای جایی ارسال نمی‌شود و کلید نشست هرگز روی دیسک نوشته نمی‌شود. رابط کاربری کاملاً فارسی و راست‌به‌چپ، با تقویم جلالی و فونت وزیرمتن طراحی شده است.
 
-> نام اپ از «دژ» (پناهگاه محافظ) و «پاسارگاد» (میرات تاریخی ایران) گرفته شده است: گاوصندوقی استوار برای اسرار شما.
+> نام اپ از «دژ» (پناهگاه محافظ) و «پاسارگاد» (میراث تاریخی ایران) گرفته شده است: گاوصندوقی استوار برای اسرار شما.
 
 ## نمایش برنامه
 
 | گشودن گاوصندوق | صندوقچه | رمزساز |
 |:---:|:---:|:---:|
-| <img src="dezh-passwordmanager-1.0.0/art/screenshots/01-unlock.jpg" alt="صفحهٔ گشودن گاوصندوق" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/02-vault.jpg" alt="فهرست گاوصندوق" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/03-generator.jpg" alt="تولیدکنندهٔ رمز" width="210"> |
+| <img src="dezh-password-manager-1.0.1/art/screenshots/04-unlock.jpg" alt="صفحهٔ گشودن گاوصندوق" width="210"> | <img src="dezh-password-manager-1.0.1/art/screenshots/01-vault.jpg" alt="فهرست گاوصندوق" width="210"> | <img src="dezh-password-manager-1.0.1/art/screenshots/02-generator.jpg" alt="تولیدکنندهٔ رمز" width="210"> |
 
 | تنظیمات | بررسی بروزرسانی |
 |:---:|:---:|
-| <img src="dezh-passwordmanager-1.0.0/art/screenshots/04-settings.jpg" alt="تنظیمات" width="210"> | <img src="dezh-passwordmanager-1.0.0/art/screenshots/05-update.jpg" alt="بررسی بروزرسانی" width="210"> |
+| <img src="dezh-password-manager-1.0.1/art/screenshots/03-settings.jpg" alt="تنظیمات" width="210"> | <img src="dezh-password-manager-1.0.1/art/screenshots/05-update.jpg" alt="بررسی بروزرسانی" width="210"> |
 
 ## ویژگی‌ها
 
@@ -44,13 +44,14 @@
 - **Android Keystore:** پارامترهای امنیتی و شمارندهٔ تلاش‌ها در فایل متادیتای رمزنگاری‌شده با کلید غیرخروجی Keystore نگهداری می‌شوند تا دستکاری پارامترهای KDF ممکن نباشد.
 - **محدودسازی تلاش نادرست:** تأخیر نمایی پس از هر ورود ناموفق (تا ۱۵ ثانیه) با شمارندهٔ مقاوم به دستکاری.
 - **قفل خودکار هوشمند:** بلافاصله / ۱ / ۵ / ۱۵ / ۳۰ دقیقه؛ بدون گزینهٔ «هرگز»؛ قفل خودکار هنگام خروج از اپ و خاموش‌شدن صفحه.
-- **حفاظت از عکاسی:** مسدودسازی پیش‌نمایش و اسکرین‌شات در صفحه‌های حساس (FLAG_SECURE)، با قابلیت خاموش‌کردن توسط کاربر.
+- **حفاظت از عکاسی:** مسدودسازی پیش‌نمایش و اسکرین‌شات در صفحه‌های حساس (`FLAG_SECURE`)، با قابلیت خاموش‌کردن توسط کاربر.
 - **پاک‌سازی خودکار کلیپ‌بورد:** هر رمز کپی‌شده پس از مهلت قابل تنظیم از کلیپ‌بورد پاک می‌شود.
 - **بدون متن خام در دیتابیس:** تنها payload رمزنگاری‌شده ذخیره می‌شود؛ جستجو پس از گشودن و در حافظه انجام می‌شود.
 
 ### 🗄️ گاوصندوق
 - رکوردها با عنوان، نام کاربری، ایمیل، رمز عبور، یادداشت، دسته‌بندی و علاقه‌مندی.
 - جستجوی زنده (رمزگشایی در حافظه)، فیلتر دسته و علاقه‌مندی‌ها، مرتب‌سازی، شمارش آیتم‌ها.
+- کارت «سلامت رمزها» با نشانگر قدرت روی هر ردیف (بدون افشای عدد آنتروپی).
 - تاریخ‌های شمسی (تقویم جلالی) برای ساخت و ویرایش هر رکورد.
 
 ### 💾 پشتیبان‌گیری و بازیابی
@@ -88,12 +89,12 @@
 
 | مورد | وضعیت |
 |---|---|
-| حداقل اندروید | اندروید ۱۰ (API 29) |
-| پشتیبانی کامل | اندروید ۱۰ تا اندروید ۱۶ (و جدیدتر) — targetSdk/compileSdk 37 |
-| معماری CPU | **یونیورسال**: بدون کد بومی (Native)؛ سازگار با همهٔ معماری‌ها (arm64-v8a، armeabi-v7a، x86_64، x86) |
-| دستگاه‌ها | گوشی و تبلت؛ سازگار با صفحه‌نمایش‌های مختلف (واکنش‌گرا بر پایهٔ WindowSizeClass) |
+| حداقل اندروید | **اندروید ۱۰ (API 29)** |
+| پشتیبانی کامل | **اندروید ۱۰ تا اندروید ۱۶** (و جدیدتر) — targetSdk / compileSdk 37 |
+| معماری CPU | **یونیورسال** — بدون کد بومی (Native)؛ سازگار با همهٔ معماری‌ها: arm64-v8a، armeabi-v7a، x86_64، x86 |
+| دستگاه‌ها | گوشی و تبلت؛ واکنش‌گرا بر پایهٔ WindowSizeClass |
 | زبان‌ها | فارسی (پیش‌فرض، RTL) و انگلیسی |
-| خروجی | یک APK یونیورسال بهینه‌شده با R8 (حدود ۳٫۷ مگابایت) |
+| خروجی | یک APK یونیورسال بهینه‌شده با R8 (حدود ۴ مگابایت) |
 
 ## دریافت و نصب
 
@@ -113,11 +114,12 @@
 
 ```bash
 # سورس پروژه داخل این پوشه است؛ ابتدا وارد آن شوید
-cd dezh-passwordmanager-1.0.0
+cd dezh-password-manager-1.0.1
 
 # راه‌اندازی محیط (اختیاری؛ برای ماشین تازه)
 scripts/setup-dev-env.sh
-source env.sh && echo "sdk.dir=$ANDROID_HOME" > local.properties
+source "$HOME/.cache/env/env.sh"
+echo "sdk.dir=$ANDROID_HOME" > local.properties
 
 # تست‌های واحد و UI (Robolectric)
 ./gradlew :app:testDebugUnitTest
@@ -135,33 +137,41 @@ source env.sh && echo "sdk.dir=$ANDROID_HOME" > local.properties
 ## ساختار پروژه
 
 ```
+dezh-password-manager-1.0.1/
+├── app/                 ماژول اندروید
+├── art/                 آیکون و اسکرین‌شات‌ها
+├── docs/                معماری فنی
+├── licenses/            پروانهٔ فونت وزیرمتن
+├── scripts/             راه‌اندازی محیط توسعه
+└── gradle/              نسخهٔ وابستگی‌ها و Wrapper
+
 app/src/main/java/com/pasargad/dezh/
 ├── navigation/      ناوبری تک‌اکتیویتی (Navigation 3) و سیاست صفحهٔ امن
 ├── presentation/    صفحه‌ها و ViewModelها (Compose + StateFlow)
 ├── domain/          UseCaseها، مدل‌ها، سنجهٔ قدرت رمز، تقویم جلالی، سیاست بروزرسانی
-├── data/            Room (رمزنگاری در لایهٔ داده)، DataStore، درگاه فایل پشتیبان، لایهٔ بروزرسانی
-├── security/        نشست کلید (RAM)، مخزن امنیتی، Keystore، قفل خودکار، سیاست تلاش ورود
-├── cryptography/    AES-GCM، PBKDF2، wrap کلید، قالب‌های نسخه‌دار DPKW/DPVG
-├── backup/          کدک پشتیبان رمزنگاری‌شده، برنامه‌ریز بازیابی، مدیر پشتیبان
+├── data/            Room، DataStore، درگاه پشتیبان، لایهٔ بروزرسانی
+├── security/        نشست کلید (RAM)، Keystore، قفل خودکار، سیاست تلاش ورود
+├── cryptography/    AES-GCM، PBKDF2، wrap کلید، قالب‌های نسخه‌دار
+├── backup/          کدک پشتیبان رمزنگاری‌شده، برنامه‌ریز بازیابی
 ├── generator/       تولیدکنندهٔ رمز (SecureRandom)
-├── settings/        تنظیمات پایدار (Preferences DataStore) و کنترل تم
+├── settings/        تنظیمات پایدار و کنترل تم
 ├── di/              تزریق وابستگی دستی (AppContainer)
 └── ui/              تم برند، حرکات و کامپوننت‌های مشترک
 ```
 
-معماری: تک‌ماژول و لایه‌بندی‌شده به سبک MVVM — `presentation → domain → data/security/cryptography`؛ بدون XML UI، بدون Fragment و بدون کتابخانهٔ DI سنگین.
+معماری: تک‌ماژول و لایه‌بندی‌شده به سبک MVVM — `presentation → domain → data/security/cryptography`؛ بدون XML UI، بدون Fragment و بدون کتابخانهٔ DI سنگین. جزئیات بیشتر: [`docs/ARCHITECTURE.md`](dezh-password-manager-1.0.1/docs/ARCHITECTURE.md).
 
 ## تست و کیفیت
 
-- **۲۵۹ تست** در ۴۵ کلاس تست واحد/Robolectric (رمزنگاری، قالب‌های فایل، مهاجرت دیتابیس، سیاست‌های امنیتی، جریان پشتیبان/بازیابی، تست‌های UI Compose) + تست دستگاه در `androidTest`.
+- ده‌ها کلاس تست واحد/Robolectric (رمزنگاری، قالب‌های فایل، مهاجرت دیتابیس، سیاست‌های امنیتی، جریان پشتیبان/بازیابی، UI Compose) + تست دستگاه در `androidTest`.
 - تست دودِ سرتاسری (end-to-end) که کل سفر کاربر را روی پشتهٔ واقعی رمزنگاری اجرا می‌کند.
-- گیت‌های کیفیت: `detekt` با پیکربندی سخت‌گیرانه (صفر یافته) و `lint` سبز در هر تغییر.
+- گیت‌های کیفیت: `detekt` و `lintDebug`.
 - قالب‌های دیتابیس Room نسخه‌بندی و commit شده‌اند تا مهاجرت‌ها تست‌پذیر بمانند.
 
 ## مجوزها
 
 - کد این پروژه تحت پروانهٔ [MIT](LICENSE) — Copyright (c) 2026 Kourosh242.
-- فونت **وزیرمتن** تحت پروانهٔ SIL Open Font License 1.1 — مشاهدهٔ متن پروانه: [`licenses/OFL-Vazirmatn.txt`](dezh-passwordmanager-1.0.0/licenses/OFL-Vazirmatn.txt).
+- فونت **وزیرمتن** تحت پروانهٔ SIL Open Font License 1.1 — [`licenses/OFL-Vazirmatn.txt`](dezh-password-manager-1.0.1/licenses/OFL-Vazirmatn.txt).
 - کتابخانه‌های AndroidX، Jetpack Compose و Kotlin تحت پروانهٔ Apache-2.0 هستند.
 
 ## سلب مسئولیت

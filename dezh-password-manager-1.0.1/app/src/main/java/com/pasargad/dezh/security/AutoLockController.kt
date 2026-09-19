@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
  * Automatic lock infrastructure. The app-level lifecycle (ProcessLifecycleOwner)
  * reports foreground/background transitions; this class owns the timer policy.
  *
- * The timeout is user-configurable from Settings (Phase 5); the policy remains
+ * The timeout is user-configurable from Settings; the policy remains
  * fail-closed: any uncertainty ends in `session.lock()`.
  */
 class AutoLockController(

@@ -1,7 +1,7 @@
 package com.pasargad.dezh.cryptography
 
 /**
- * Central cryptographic parameters for Dezh-e Pasargad (Phase 2 baseline).
+ * Central cryptographic parameters for Dezh-e Pasargad.
  * Values here define the versioned on-disk formats — see docs/PHASE2-SECURITY-DESIGN.md.
  */
 object CryptoConstants {

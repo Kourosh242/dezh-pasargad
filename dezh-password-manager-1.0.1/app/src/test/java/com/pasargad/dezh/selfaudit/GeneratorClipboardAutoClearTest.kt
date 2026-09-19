@@ -27,7 +27,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Deterministic clipboard auto-clear contract (self-audit round 2, bug #5).
+ * Deterministic clipboard auto-clear contract (clipboard auto-clear regression).
  *
  * Time is fully controlled via the injected [GeneratorScreen] `suspendDelay`:
  * each delay(ms) call registers a gate keyed by its duration; the test resumes

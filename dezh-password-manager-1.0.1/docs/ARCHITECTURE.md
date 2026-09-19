@@ -1,131 +1,128 @@
-# معماری و مستندات فنی — دژ پاسارگاد
+# معماری فنی — دژ پاسارگاد
 
-**آخرین به‌روزرسانی:** فاز ۷ (QA و Audit) — سپتامبر ۲۰۲۶
-**این سند:** architecture، packages، security model، crypto design، DB schema، backup format، restore behavior، build configuration، dependencies، testing strategy، تصمیم‌های مهم و محدودیت‌ها.
+**نسخهٔ مستند:** 1.0.1  
+**هدف:** شرح لایه‌ها، مدل امنیتی، قالب داده، پیکربندی build و استراتژی تست برای توسعه‌دهندگان.
 
 ---
 
-## ۱. نمای کلی معماری
+## ۱. نمای کلی
 
-تک‌ماژول (`app`)، تک‌اکتیویتی، Compose-first، آفلاین محض:
+تک‌ماژول (`:app`)، تک‌اکتیویتی، Compose-first و آفلاین‌محور:
 
 ```
-UI (Compose, M3, RTL)
+UI (Compose, Material 3, RTL)
    │  events ↑ / state ↓ (StateFlow)
 ViewModels (presentation/*)
    │
-Use Cases (domain/*)            ← قواعد کسب‌وکار، بدون Android
+Use Cases (domain/*)                 ← قواعد کسب‌وکار، بدون وابستگی Android
    │
-Repositories (data/vault, data/security, data/backup, settings)
+Repositories (data/*, settings)
    │
-Room 2.8.5 (metadata ستونی + payload رمزشده) │ Files (security/backup) │ DataStore (settings)
+Room (metadata ستونی + payload رمز) │ Files (security/backup) │ DataStore (settings)
 ```
 
-- **DI دستی** با `AppContainer` (بدون Hilt — طبق تصمیم فاز ۱، justified بودن لازم بود و نبود).
-- **قفل=session:** `VaultLockState` تنها مرجع ناوبری است؛ Navigation 3 (`rememberNavBackStack`) back stack را از روی lockState بازمی‌سازد — کاربر قفل‌شده هرگز صفحه‌ای از گاوصندوق باز نمی‌بیند.
-- **هیچ secret ای از navigation arguments عبور نمی‌کند** (فقط idهای UUID غیرحساس).
+- **DI دستی** با `AppContainer` (بدون Hilt) برای سادگی و اندازهٔ کوچک APK.
+- **قفل = نشست:** `VaultLockState` مرجع ناوبری است؛ با Navigation 3 back stack از روی وضعیت قفل بازسازی می‌شود و کاربر قفل‌شده هرگز به صفحات گاوصندوق دسترسی ندارد.
+- **هیچ رازی در navigation arguments** عبور نمی‌کند (فقط شناسه‌های غیرحساس).
 
 ## ۲. پکیج‌ها
 
 | پکیج | مسئولیت |
-|-------|----------|
-| `cryptography/` | اولیه‌های رمزنگاری خالص JVM: AES-256-GCM، PBKDF2، KeyWrapper، EncryptionContainer (DPVG) |
-| `security/` | VaultSession (تنها دارندهٔ DEK در حافظه)، AutoLockController، LoginAttemptPolicy، VaultSecurityStorage، KeystoreGateway |
-| `domain/` | مدل‌ها (VaultEntry/Draft/VaultLockState)، VaultEntryRepository، ۸+ use case، VaultSortOption، PasswordStrengthMeter، PasswordStrengthValidator |
-| `data/vault/` | Room: Entity/DAO/DB/Migrations + RoomVaultEntryRepository (مهر/بازکردن payload، فیلتر/جستجو/مرتب‌سازی in-memory، import/replace) |
-| `data/security/` | FileVaultSecurityRepository: setup/unlock/lock روی فایل‌ها با KDF+wrap |
-| `data/backup/` | BackupFileGateway (SAF، دسته‌بندی خطا) |
-| `backup/` | BackupCodec (قالب پاکت)، BackupManager، RestorePlanner، مدل‌ها |
-| `settings/` | DezhSettings، SettingsRepository، DataStoreSettingsRepository، ThemeModeController |
-| `generator/` | PasswordGenerator (SecureRandom، min-per-class، Fisher–Yates) |
-| `presentation/*` | ViewModel/Screen هر صفحه (vault، search، categories، generator، backup، settings، setup، unlock، startup) |
-| `navigation/` | DezhDestination (serializable NavKeyها) + DezhApp |
-| `ui/theme/`، `ui/` | توکن‌های M3، تم، accentها، SecureScreenPolicy |
+|------|---------|
+| `cryptography/` | اولیه‌های رمزنگاری JVM: AES-256-GCM، PBKDF2، KeyWrapper، EncryptionContainer |
+| `security/` | VaultSession (دارندهٔ DEK در RAM)، AutoLock، سیاست تلاش ورود، Keystore |
+| `domain/` | مدل‌ها، UseCaseها، سنجه/اعتبارسنج قدرت رمز، تقویم جلالی، سیاست بروزرسانی |
+| `data/vault/` | Room Entity/DAO/DB + مخزن رکوردها (رمزگشایی در حافظه پس از unlock) |
+| `data/security/` | setup/unlock/lock روی فایل‌های keywrap و meta |
+| `data/backup/` | درگاه SAF برای پشتیبان |
+| `data/update/` | دریافت Release گیت‌هاب، دانلود APK، اعتبارسنجی و نصب |
+| `backup/` | کدک پشتیبان، مدیر پشتیبان، برنامه‌ریز بازیابی |
+| `settings/` | DataStore تنظیمات و کنترل تم |
+| `generator/` | تولید رمز با SecureRandom |
+| `presentation/*` | Screen و ViewModel هر بخش |
+| `navigation/` | مقصدها و ریشهٔ ناوبری |
+| `ui/` | تم برند، کامپوننت‌ها، سیاست صفحهٔ امن |
 | `di/` | AppContainer |
 
 ## ۳. مدل امنیتی
 
-- **راز اصلی:** master password کاربر. هیچ‌جا ذخیره نمی‌شود.
-- **DEK (کلید داده):** AES-256 تصادفی، فقط در حافظهٔ `VaultSession`؛ با قفل شدن صفر می‌شود.
-- **wrap:** DEK با کلید مشتق‌شده از master password (PBKDF2-SHA256, 600k) + salt تصادفی رمز می‌شود (`keywrap`) و کنارش `meta` شامل پارامترهای KDF که خودش با **AndroidKeystore** (کلید غیرخروجی، AES-GCM) مهر می‌شود.
-- **Brute-force:** LoginAttemptPolicy با backoff نمایی و **شمارندهٔ ماندگار روی دیسک** (restart هم شمارنده را نگه می‌دارد؛ لاگین موفق reset می‌کند).
-- **Auto-lock:** بلافاصله/۱/۵/۱۵/۳۰ دقیقه؛ «هرگز» توسط سیاست ممنوع و در کد fail-closed است. رویدادها: background، screen-off؛ پس از lock، UI به Unlock هدایت و ViewModelهای حاوی plaintext نابود می‌شوند.
-- **نشت:** FLAG_SECURE روی همهٔ صفحه‌های حساس؛ بدون notification/log/analytics؛ clipboard فقط با اقدام صریح + پاک‌سازی خودکار.
-- **Offline-first:** صفر permission در manifest (حتی INTERNET).
+- **رمز اصلی:** هرگز ذخیره نمی‌شود؛ فقط برای KDF در حافظهٔ کوتاه‌عمر (`char[]`) استفاده و سپس پاک می‌شود.
+- **DEK:** کلید دادهٔ AES-256 تصادفی؛ فقط در `VaultSession` (RAM)؛ با قفل‌شدن صفر می‌شود (fail-closed).
+- **Wrap:** DEK با کلید مشتق‌شده از رمز اصلی (PBKDF2-HMAC-SHA256، ۶۰۰٬۰۰۰ تکرار، salt تصادفی ۱۶ بایتی) پیچیده می‌شود؛ پارامترهای KDF و شمارندهٔ تلاش در meta رمزنگاری‌شده با کلید **غیرخروجی Android Keystore** نگه داشته می‌شوند.
+- **Brute-force:** تأخیر نمایی + شمارندهٔ ماندگار روی دیسک.
+- **قفل خودکار:** بلافاصله / ۱ / ۵ / ۱۵ / ۳۰ دقیقه — بدون گزینهٔ «هرگز».
+- **نشت UI:** `FLAG_SECURE` روی صفحات حساس (قابل خاموش‌کردن توسط کاربر)، پاک‌سازی خودکار کلیپ‌بورد، بدون لاگ/آنالیتیکس/تبلیغ.
+- **شبکه:** فقط برای «بررسی بروزرسانی» اختیاری از GitHub Releases؛ بدون ابر و بدون همگام‌سازی.
 
-## ۴. طراحی رمزنگاری (crypto design)
+## ۴. رمزنگاری
 
 | جزء | انتخاب |
-|------|--------|
-| رمز متقارن | AES-256-GCM (تگ ۱۲۸ بیتی، IV تصادفی ۱۲ بایتی از SecureRandom) |
-| KDF | PBKDF2-HMAC-SHA256، ۶۰۰٬۰۰۰ iteration، salt ۱۶ بایتی تصادفی |
-| ساختار payload | `EncryptionContainer` (DPVG): version ‖ iv ‖ ciphertext ‖ tag — با شمارهٔ نسخه برای مهاجرت آینده |
-| AAD | در backup: `format|version|entryCount|createdAt` |
-| Nonce | منحصربه‌فرد در هر encrypt (تست ۱۰۰۰ موردی موجود)؛ GCM با IV تکراری امن نیست، لذا هیچ مسیر deterministic نداریم |
-| خطاها | شکست تگ/AAD → exception نوع‌دار (هیچ‌وقت plaintext ناقص برنمی‌گردد) |
+|-----|--------|
+| رمز متقارن | AES-256-GCM (تگ ۱۲۸ بیت، IV تصادفی ۱۲ بایتی از SecureRandom) |
+| KDF | PBKDF2-HMAC-SHA256، ۶۰۰٬۰۰۰ iteration |
+| payload رکورد | ظرف نسخه‌دار (version ‖ iv ‖ ciphertext ‖ tag) |
+| AAD پشتیبان | `format\|version\|entryCount\|createdAt` |
+| خطا | شکست تگ/AAD → exception نوع‌دار؛ plaintext ناقص برنمی‌گردد |
 
 ## ۵. Schema دیتابیس (نسخهٔ ۱)
 
 ```sql
 CREATE TABLE vault_entries (
   id TEXT PRIMARY KEY NOT NULL,
-  payload BLOB NOT NULL,        -- EncryptionContainer(JSON EntrySecrets) با DEK session
+  payload BLOB NOT NULL,        -- ظرف رمزنگاری‌شدهٔ اسرار رکورد
   category TEXT NOT NULL,       -- متادیتای ستونی (عمداً plaintext)
   favorite INTEGER NOT NULL,
   createdAt INTEGER NOT NULL,
   updatedAt INTEGER NOT NULL
 );
--- indices: index_vault_entries_favorite, index_vault_entries_category, index_vault_entries_updatedAt
 ```
 
-- export شده در `app/schemas/…/1.json`؛ MigrationTestHelper + identity hash Room 2.8.
-- جستجوی متنی **in-memory** پس از unlock (بدون index پایدار plaintext)؛ فیلتر دسته/علاقه‌مندی در سطح DB روی ستون‌های متادیتا.
+- Schema در `app/schemas/…/1.json` نسخه‌بندی و commit شده است.
+- جستجوی متنی **در حافظه** پس از unlock؛ فیلتر دسته/علاقه‌مندی روی ستون‌های متادیتا در DB.
 
-## ۶. قالب پشتیبان (backup format)
+## ۶. قالب پشتیبان
 
-JSON envelope با `format="dezh-backup"`، `version=1`، هدر KDF/cipher، checksum SHA-256 روی ciphertext، ciphertext (AES-256-GCM روی payload شامل همهٔ رکوردها). مستقل از فرمت SQLite. iterationهای KDF داخل فایل سفر می‌کنند (migration-friendly). نسخه‌های بالاتر از پشتیبانی → خطای متمایز. جزئیات: `docs/PHASE5-REPORT.md`.
+پاکت JSON با `format="dezh-backup"`، `version=1`، هدر KDF/cipher، checksum SHA-256 روی ciphertext و بدنهٔ AES-256-GCM. مستقل از SQLite؛ iterationهای KDF داخل فایل سفر می‌کنند. سقف حجم ورودی ۶۴MB؛ تشخیص جداگانهٔ «رمز اشتباه» از «فایل خراب».
 
-## ۷. رفتار بازیابی (restore behavior)
+## ۷. بازیابی
 
-مرحله‌ای: انتخاب فایل (SAF، بدون اعتماد به filename/MIME، سقف ۶۴MB) → اعتبارسنجی هدر **بدون** passphrase → رمزگشایی → پیش‌نمایش تعداد → انتخاب **ادغام** (درج غایب‌ها + به‌روزرسانی فقط اکیداً جدیدترها، بدون حذف) یا **جایگزینی کامل** (تأیید صریح دو مرحله‌ای؛ حذف کل + درج؛ گارد id تکراری) یا انصراف. هر ۹ خطای تعریف‌شده پیام فارسی متمایز دارند.
+انتخاب فایل (SAF) → اعتبارسنجی هدر → رمزگشایی → پیش‌نمایش → **ادغام** یا **جایگزینی کامل** (با تأیید صریح) یا انصراف. هیچ overwrite خاموشی وجود ندارد.
 
 ## ۸. پیکربندی build
 
 | مورد | مقدار |
 |------|-------|
-| AGP / Gradle | 9.4.0 / 9.6.0 (wrapper) |
-| Kotlin / KSP | 2.4.20 / 2.3.12 |
-| compileSdk / targetSdk / minSdk | 37 / 37 / **29 (Android 10+)** |
-| JDK | 17 (toolchain سندباکس) |
-| Release | **R8 minify + shrinkResources فعال (فاز ۷)**، unsigned، `proguard-android-optimize` + قوانین حداقلی (نگهداشت خوانایی stack trace) |
-| APK اندازه | release ≈ **3.10MB** / debug ≈ 33.7MB (اندازه‌گیری‌شده) |
-| JVM sandbox | `-Xmx576m`، SerialGC، workers=1 (الگوی اجرای مرحله‌ای برای تست‌ها) |
+| minSdk / targetSdk / compileSdk | 29 / 37 / 37 (اندروید ۱۰ تا ۱۶ و جدیدتر) |
+| JDK | 17 |
+| Kotlin / Compose | طبق `gradle/libs.versions.toml` |
+| Release | R8 minify + shrinkResources |
+| ABI | یونیورسال — بدون کد native؛ سازگار با arm64-v8a، armeabi-v7a، x86_64، x86 |
+| applicationId | `com.pasargad.dezh` |
+| versionName / versionCode | 1.0.1 / 2 |
 
-## ۹. وابستگی‌ها (همه stable، بدون alpha/beta)
+خروجی release به‌صورت unsigned از Gradle ساخته می‌شود؛ امضا با keystore شخصی **خارج از مخزن** انجام می‌گیرد.
 
-compose-bom 2026.09.00، material3 (+ window-size-class 1.4.0، icons-core)، navigation3 1.1.7، lifecycle 2.11.0، room 2.8.5 (+ksp)، datastore-preferences 1.2.1، kotlinx-coroutines 1.11.0 (+test)، kotlinx-serialization-json، robolectric 4.17، junit 4.13.2، androidx.test (junit/runner/core)، detekt 1.23.8. **هیچ وابستگی شبکه‌ای/تحلیلی/تبلیغاتی وجود ندارد.**
+## ۹. وابستگی‌های اصلی
 
-## ۱۰. استراتژی تست
+AndroidX Compose (Material 3)، Navigation 3، Lifecycle، Room، DataStore Preferences، Kotlin Coroutines، Kotlinx Serialization. **بدون** SDK تبلیغات، analytics، crash-reporter ابری یا همگام‌سازی ابری.
 
-- **واحد JVM:** crypto (۹)، security files (۱۲+)، چرخهٔ کامل auth (۲)، repo (۱۴ شامل large ۵۰۰۰)، DAO/DB واقعی Robolectric (۸ شامل migration، transaction، restart، large ۲۰۰۰)، backup codec/manager/planner/errors (۳۱)، settings DataStore (۵) + کنترلر تم (۴)، generator (۸)، meter (۶)، validator، auto-lock (۹)، SecureScreenPolicy (۴)، NoSensitiveData (اسکن).
-- **UI (Robolectric Compose، locale fa):** لیست/خالی، نوار بالای گاوصندوق، مولّد، تنظیمات (۷).
-- **گیت هر فاز:** BUILD → TESTS → UI → RTL/DARK/LIGHT → A11Y → LINT → detekt (+ SECURITY در ۵–۷).
-- **اجرای نهایی فاز ۷:** clean build + ۱۶۴/۱۶۴ + lint ۰ + detekt ۰ + assembleRelease با R8.
+## ۱۰. تست
+
+- تست واحد JVM برای crypto، security، vault، backup، generator، settings، update.
+- تست UI با Robolectric Compose (locale فارسی).
+- تست دود end-to-end روی پشتهٔ واقعی رمزنگاری.
+- گیت‌های کیفیت: `detekt` و `lintDebug`.
 
 ## ۱۱. تصمیم‌های مهم
 
-1. DI دستی به‌جای Hilt (سادگی/اندازه).
-2. plaintext فقط در RAMِ session باز؛ DB فقط payload رمز + متادیتای حداقلی ستونی؛ جستجو در حافظه.
-3. Room 2.8.5 (نسخهٔ 3 منتشرنشده)؛ پین‌های stable.
-4. DataStore جایگزین SharedPreferences در فاز ۵.
-5. «هرگز» برای auto-lock ممنوع (fail-closed در UI و کد).
-6. R8 در فاز ۷ فعال شد چون codebase عاری از reflection است (serializerهای تولیدی، consumer rules کتابخانه‌ها).
-7. اندروید ۱۵ به بالا در سندباکس قابل تست نیست (Robolectric sdk=35 روی JDK 17)؛ پوشش با minSdk 29 سعی شده از طریق API-guardهای استاندارد M3/DataStore/SAF برقرار باشد.
+1. DI دستی به‌جای Hilt (سادگی و اندازه).
+2. فقط payload رمز در DB؛ جستجو در RAM پس از unlock.
+3. ممنوعیت auto-lock «هرگز» در UI و کد.
+4. R8 فعال چون codebase عاری از reflection زمان‌اجرا است.
+5. نصب بروزرسانی فقط با `PackageInstaller` رسمی اندروید + اعتبارسنجی package / versionCode / امضا.
 
 ## ۱۲. محدودیت‌ها
 
-- تست instrumentation روی emulator (APIهای ۱۰ تا ۱۵ به‌صورت دستگاه واقعی) در سندباکس ممکن نیست؛ معادل Robolectric اجرا می‌شود.
-- تشخیص «کمبود فضا» از متن IOException است (API قطعی برای SAF ندارد).
-- robustness در برابر OEM-specific behaviors (recents screenshot در برخی لانچرها) تضمین فراتر از FLAG_SECURE ندارد؛ عکس با دستگاه دیگر ذاتاً قابل جلوگیری نیست.
-- release unsigned است (توزیع نه؛ امضا مستلزم keystore کاربر).
-- PBKDF2 ۶۰۰k روی دستگاه‌های خیلی ضعیف ممکن است unlock را تا ~۱ ثانیه کند کند (عمدی؛ تعادل امنیت/سرعت).
+- PBKDF2 با ۶۰۰k iteration روی دستگاه‌های خیلی ضعیف ممکن است unlock را تا حدود یک ثانیه طول بدهد (عمدی).
+- رفتار recents/screenshot روی برخی OEMها فراتر از `FLAG_SECURE` تضمین کامل ندارد.
+- رمز اصلی و عبارت عبور پشتیبان قابل بازیابی نیستند؛ مسئولیت نگه‌داری با کاربر است.

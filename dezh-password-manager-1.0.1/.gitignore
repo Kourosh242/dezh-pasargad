@@ -1,20 +1,25 @@
-# Dezh-e Pasargad
+# Dezh-e Pasargad — app module
 *.iml
 .gradle/
 build/
 /captures
 .externalNativeBuild
-.cxx
+.cxx/
+kotlin/errors/**
 
 # IDE
 .idea/
 *.swp
 
-# Environment-specific SDK path (regenerated locally / by Android Studio)
+# Local / secrets
 local.properties
+*.jks
+*.keystore
+*.p12
+*.pem
 
-# signed deliverable stays out of git (workspace file only)
-dezh-pasargad-release.apk
+# Deliverables
 *.apk
-kotlin/errors/**
+*.aab
 *.idsig
+dezh-pasargad-release.apk
