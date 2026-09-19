@@ -15,8 +15,7 @@ import kotlinx.coroutines.launch
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
 /**
- * Theme state holder backed by the DataStore settings repository (Phase 5 —
- * the Phase-4 SharedPreferences implementation is gone). Writes go through
+ * Theme state holder backed by the DataStore settings repository. Writes go through
  * [SettingsRepository]; the StateFlow mirrors the persisted value.
  */
 class ThemeModeController(

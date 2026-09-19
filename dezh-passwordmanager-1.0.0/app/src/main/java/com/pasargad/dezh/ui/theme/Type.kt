@@ -15,8 +15,8 @@ import com.pasargad.dezh.R
  * wght axis, so no multi-file family is bundled.
  *
  * Line heights are tuned generously for Persian ascenders/descenders and the
- * slightly taller Vazirmatn x-height: body line-height ratio ≥ 1.5 per skill
- * typography rules (base body 16sp).
+ * slightly taller Vazirmatn x-height: body line-height ratio ≥ 1.5
+ * (base body 16sp).
  */
 val VazirmatnFamily = FontFamily(
     Font(

@@ -38,7 +38,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 
 /**
- * FINAL RELEASE SMOKE TEST — the complete user journey in one chained run over
+ * End-to-end smoke test — the complete user journey in one chained run over
  * the real crypto stack (PBKDF2 + AES-GCM + file storage), exactly mirroring
  * the on-device flow order: startup → setup → wrong password → unlock → CRUD →
  * favorite → category → search/filter/sort → generator constraints → backup →

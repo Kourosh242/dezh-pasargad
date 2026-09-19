@@ -13,8 +13,8 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 
 /**
- * Brand motion — Material 3 Expressive spring philosophy distilled to the
- * four canonical specs (skill: m3-expressive, §Spring Specifications):
+ * Brand motion — Material 3 Expressive spring philosophy distilled to four
+ * canonical specs:
  *  bouncy  → playful emphasis (favorite heart, hero reveals)
  *  snappy  → responsive micro-interactions (press scale)
  *  gentle  → large calm transitions

@@ -1,4 +1,4 @@
-// Dezh-e Pasargad — :app module (Phase 2: security & crypto layer)
+// Dezh-e Pasargad — :app module
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -34,9 +34,9 @@ android {
 
     buildTypes {
         release {
-            // Phase 7 audit: R8 shrinking enabled — the app is reflection-free at
-            // runtime (generated kotlinx.serialization serializers + Room's
-            // consumer rules ship with the libraries), so shrinking is safe here.
+            // R8 shrinking is enabled: the app is reflection-free at runtime
+            // (generated kotlinx.serialization serializers + Room's consumer rules
+            // ship with the libraries), so shrinking is safe here.
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

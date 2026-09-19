@@ -38,9 +38,13 @@ import com.pasargad.dezh.R
 import com.pasargad.dezh.generator.PasswordGenerator.Options
 import kotlinx.coroutines.delay
 
-/** Standalone secure password generator (no generated value is ever logged). */
+/**
+ * Pre-fix copy of the generator screen, kept solely as the negative control for
+ * [com.pasargad.dezh.regression.GeneratorClipboardAutoClearTest]: the test must
+ * fail against this variant and pass against the real screen.
+ */
 @Composable
-fun GeneratorScreenBuggy(
+fun LegacyGeneratorScreen(
     viewModel: GeneratorViewModel,
     modifier: Modifier = Modifier,
     animationsEnabled: Boolean = true,
