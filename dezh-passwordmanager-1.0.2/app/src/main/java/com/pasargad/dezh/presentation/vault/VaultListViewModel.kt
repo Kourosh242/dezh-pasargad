@@ -61,7 +61,7 @@ class VaultListViewModel(
     val themeMode: StateFlow<ThemeMode> = themeModeController.mode
 
     init {
-        // Phase 5: sort order and (opt-in) last filters are restored from DataStore.
+        // Sort order and (opt-in) last filters are restored from DataStore.
         viewModelScope.launch {
             val settings = settingsRepository?.current() ?: return@launch
             sort.value = settings.sortOrder

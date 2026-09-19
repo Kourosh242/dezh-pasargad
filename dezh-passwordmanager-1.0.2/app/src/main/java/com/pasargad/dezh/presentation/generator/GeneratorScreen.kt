@@ -68,9 +68,8 @@ fun GeneratorScreen(
     var copiedMessage by remember { mutableStateOf(false) }
 
     // Each copy bumps a generation counter; the auto-clear is keyed on it —
-    // NOT on the message flag. Keying both on one boolean used to let the
-    // 1.5s message hide CANCEL the pending clipboard wipe, so the copied
-    // password never auto-cleared (self-audit bug #5).
+    // NOT on the message flag, so the short-lived "copied" message can never
+    // cancel the pending clipboard wipe.
     var copyGeneration by remember { mutableStateOf(0) }
 
     LaunchedEffect(copyGeneration) {

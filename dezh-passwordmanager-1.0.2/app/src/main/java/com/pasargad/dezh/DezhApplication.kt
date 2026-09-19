@@ -24,7 +24,6 @@ class DezhApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        installCrashBreadcrumb()
         container = AppContainer(this)
 
         container.applicationScope.launch {
@@ -59,28 +58,4 @@ class DezhApplication : Application() {
         )
     }
 
-    /**
-     * Diagnostics: on any uncaught crash the stack trace is appended to a
-     * user-accessible file (Android/data/com.pasargad.dezh/files/) so a failure
-     * can be reported without adb. Best-effort only; never replaces the
-     * system handler.
-     */
-    private fun installCrashBreadcrumb() {
-        val systemHandler = Thread.getDefaultUncaughtExceptionHandler()
-        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
-            runCatching {
-                val dir = getExternalFilesDir(null) ?: return@runCatching
-                java.io.File(dir, "dezh-crash-log.txt").appendText(
-                    buildString {
-                        append("\n==== ")
-                        append(java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.US).format(java.util.Date()))
-                        append(" ====")
-                        append("\nthread: ").append(thread.name)
-                        append("\n").append(android.util.Log.getStackTraceString(throwable))
-                    },
-                )
-            }
-            systemHandler?.uncaughtException(thread, throwable)
-        }
-    }
 }

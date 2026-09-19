@@ -1,4 +1,4 @@
-package com.pasargad.dezh.selfaudit
+package com.pasargad.dezh.quality
 
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -35,15 +35,13 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Deterministic clipboard auto-clear contract for the ENTRY DETAIL screen
- * (full-audit round). Mirrors the round-2 generator harness: delay gates keyed
- * by capture order, paused looper pumping, no real time.
+ * Deterministic clipboard auto-clear contract for the ENTRY DETAIL screen.
+ * Delay gates are keyed by capture order and pumped on a paused looper, so no
+ * real time elapses during the test.
  *
  * Contract under test: EVERY copy re-arms the wipe — a re-copy inside the
  * window must CANCEL the pending wipe and start a fresh full window for the
- * newest clipboard value. The shipped boolean-keyed effect does not restart on
- * a second copy, so the wipe fires while the newest value has NOT lived its
- * full window (differential assertion below fails on that logic).
+ * newest clipboard value.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)

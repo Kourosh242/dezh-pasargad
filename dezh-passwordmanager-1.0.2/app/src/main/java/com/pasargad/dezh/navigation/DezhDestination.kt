@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface DezhDestination : NavKey {
 
-    /** First screen: app identity / phase verification (Phase 1). */
+    /** First screen: app identity splash. */
     @Serializable
     data object Startup : DezhDestination
 

@@ -85,7 +85,7 @@ class AppContainer(context: Context) {
         secureRandom = secureRandom,
     )
 
-    // --- vault database & repository (Phase 3) --------------------------------------
+    // --- vault database & repository --------------------------------------------------
     @Suppress("SpreadOperator") // Room's API is varargs; the migration history is a small fixed array.
     val vaultDatabase: DezhVaultDatabase = Room.databaseBuilder(
         appContext,
@@ -107,7 +107,7 @@ class AppContainer(context: Context) {
     val lockVault = LockVaultUseCase(securityRepository)
     val passwordStrengthValidator = PasswordStrengthValidator()
 
-    // --- vault use cases (Phase 3) ----------------------------------------------------
+    // --- vault use cases ---------------------------------------------------------------
     val observeEntries = ObserveEntriesUseCase(vaultEntryRepository)
     val observeCategories = ObserveCategoriesUseCase(vaultEntryRepository)
     val observeEntry = ObserveEntryUseCase(vaultEntryRepository)
@@ -117,7 +117,7 @@ class AppContainer(context: Context) {
     val deleteVaultEntry = DeleteEntryUseCase(vaultEntryRepository)
     val toggleVaultFavorite = ToggleFavoriteUseCase(vaultEntryRepository)
 
-    // --- settings (Phase 5: DataStore, replaces SharedPreferences) ------------------
+    // --- settings (DataStore) ----------------------------------------------------------
     val settingsRepository: SettingsRepository = DataStoreSettingsRepository(appContext)
     val autoLockController = AutoLockController(applicationScope, session)
     val themeModeController = ThemeModeController(settingsRepository, applicationScope)
@@ -132,7 +132,7 @@ class AppContainer(context: Context) {
         }
     }
 
-    // --- backup / restore (Phase 5) --------------------------------------------------
+    // --- backup / restore ---------------------------------------------------------------
     val backupFileGateway: BackupFileGateway = SafBackupFileGateway(appContext.contentResolver)
     val backupManager = BackupManager(BackupCodec(secureRandom), vaultEntryRepository)
 
